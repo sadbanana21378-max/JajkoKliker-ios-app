@@ -11,112 +11,211 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-  <style>
-   /* Responsywna wersja */
+<style>
+/* ----------------- RESPONSYWNY CSS (zastępuje cały poprzedni) ----------------- */
 
-body { 
-  font-family: Arial, sans-serif; 
-  background: url('https://cdn.pixabay.com/photo/2019/08/11/00/46/waterfall-4397970_1280.jpg') 
-    no-repeat center center fixed; 
-  background-size: cover; 
-  text-align: center; 
-  color: #fff; 
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* Tło i ogólne */
+body {
+  font-family: Arial, sans-serif;
+  background: url('https://cdn.pixabay.com/photo/2019/08/11/00/46/waterfall-4397970_1280.jpg') no-repeat center center;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  min-height:100vh;
+  padding-bottom:80px; /* miejsce na dolne info */
 }
 
-/* Przycisk responsywny */
-.button { 
-  padding: 12px 20px; 
-  margin: 8px; 
-  cursor: pointer; 
-  background: rgba(0,0,0,0.6); 
-  border: 2px solid #000; 
-  border-radius: 12px; 
-  font-size: 1.1em; 
-  color: #fff; 
+/* przyciski */
+.button {
+  display:inline-block;
+  padding: 12px 18px;
+  margin: 8px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.65);
+  border: 2px solid #000;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #fff;
+  line-height:1;
 }
 
-/* Jajko – dopasowanie do ekranu */
-#egg { 
-  width: 100%; 
-  max-width: 300px; 
-  cursor: pointer; 
-  border: 2px solid #000; 
+/* Jajko */
+#egg {
+  width: 100%;
+  max-width: 320px;
+  cursor: pointer;
+  border: 2px solid #000;
+  display:block;
+  margin: 14px auto;
 }
 
-/* BOKSY – max 500px ale elastyczne */
-.box { 
-  margin: 20px auto; 
-  padding: 20px; 
-  background: rgba(0,0,0,0.6); 
-  width: 90%; 
-  max-width: 500px; 
-  border-radius: 12px; 
-  font-size: 1em; 
-  color: #fff; 
-  border: 2px solid #000; 
+/* Boxy - elastyczne */
+.box {
+  margin: 16px auto;
+  padding: 18px;
+  background: rgba(0,0,0,0.55);
+  width: 94%;
+  max-width: 520px;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #fff;
+  border: 2px solid #000;
 }
 
-/* Obrazki ogólne */
-img { 
-  width: 100%; 
-  max-width: 120px; 
-  border: 2px solid #000; 
+/* Obrazki w listach / miniatury */
+img {
+  width: 100%;
+  max-width: 120px;
+  border: 2px solid #000;
+  display:inline-block;
 }
 
-/* Animacja dropów – responsywna */
-#dropAnimWrapper { 
-  width: 90%; 
-  max-width: 500px; 
-  height: 150px; 
-  overflow: hidden; 
-  border: 3px solid #000; 
-  margin: 20px auto; 
-  display: none; 
-  background: rgba(0,0,0,0.6); 
+/* Animacja dropów */
+#dropAnimWrapper {
+  width: 94%;
+  max-width: 520px;
+  height: 150px;
+  overflow: hidden;
+  border: 3px solid #000;
+  margin: 16px auto;
+  display: none;
+  background: rgba(0,0,0,0.55);
 }
 
-#dropAnim img { 
-  width: 100%; 
-  max-width: 120px; 
-  margin: 10px; 
+#dropAnim {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  /* animacja będzie przesuwać całą listę o jej własną szerokość */
+  animation: slide 2s linear;
+}
+#dropAnim img {
+  width: 100%;
+  max-width: 120px;
+  margin: 0 6px;
 }
 
-/* Nagroda */
-#bigDrop img { 
-  width: 100%; 
-  max-width: 300px; 
-  border: 4px solid #000; 
-  border-radius: 12px; 
+/* lepsza animacja używająca procentów (nie stałej -900px) */
+@keyframes slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 20px)); }
 }
 
-/* Lobby obraz */
-#lobbyChicken img { 
-  width: 120px; 
-  max-width: 30vw; 
-  border-radius: 12px; 
+/* Big drop */
+#bigDrop img {
+  width: 100%;
+  max-width: 320px;
+  border: 4px solid #000;
+  border-radius: 12px;
+  display:block;
+  margin: 10px auto 0;
+}
+#bigDrop p {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.05rem;
+  color: #fff;
 }
 
-/* Info górne i dolne — zmniejszone na telefonach */
+/* Lobby chicken - zmiana pozycji na mobilnym */
+#lobbyChicken {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display:flex;
+  gap:12px;
+  z-index:50;
+  padding:6px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  border:2px solid #000;
+}
+#lobbyChicken img {
+  width: 110px;
+  max-width: 28vw;
+  border-radius: 10px;
+}
+
+/* User info / general info - responsywne bloki */
 #userInfo, #generalInfo {
-  font-size: 1em;
-  padding: 10px 15px;
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  max-width: 560px;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.45);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #fff;
+  border: 2px solid #000;
+  z-index:60;
+  text-align:left;
 }
 
-/* MEDIA QUERIES — ulepszenie dla małych ekranów */
+/* userInfo top, generalInfo bottom */
+#userInfo { top: 10px; }
+#generalInfo { bottom: 10px; }
+
+/* credits overlay */
+#creditsOverlay {
+  position: fixed;
+  top: 0; left: 0; width:100%; height:100%;
+  background: rgba(0,0,0,0.95);
+  color:#fff;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-size:1.1rem;
+  z-index:100;
+}
+#creditsOverlay button { margin-top: 16px; }
+
+/* poprawki list i marketu zeby nie wywalalo */
+#chickenList li, #marketList li {
+  list-style:none;
+  margin:8px 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background: rgba(255,255,255,0.03);
+  padding:8px;
+  border-radius:8px;
+}
+
+/* MEDIA QUERIES */
 @media (max-width: 600px) {
-  body { font-size: 14px; }
 
-  .button {
-    padding: 10px 15px;
-    font-size: 0.9em;
+  /* unikamy background-attachment: fixed na mobilach (moze powodowac problemy) */
+  body { background-attachment: scroll; }
+
+  .button { padding:10px 14px; font-size:0.95rem; }
+
+  .box { padding:14px; }
+
+  #userInfo, #generalInfo {
+    font-size:0.95rem;
+    padding:8px 10px;
+    left:6px; right:6px;
   }
 
-  #lobbyChicken img {
-    width: 90px;
-  }
+  #lobbyChicken { bottom: 70px; gap:8px; padding:6px; }
+  #lobbyChicken img { width:80px; max-width:26vw; }
+
+  #dropAnimWrapper { height:120px; }
+  #bigDrop img { max-width: 260px; }
 }
 
-  </style>
+/* dodatkowa drobna estetyka na duze ekrany */
+@media(min-width: 1200px) {
+  .box { max-width: 700px; }
+}
+</style>
+
 </head>
 <body>
   <div id="userInfo">
